@@ -19,11 +19,20 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText( this,"Button was clicked !", Toast.LENGTH_SHORT ).show()
         }
         btnSendMsg.setOnClickListener {
-            val message=userMsg.text.toString()
+            val message: String= userMsg.text.toString()
 
             val intent=Intent(this,SecondActivity::class.java)
             intent.putExtra("user_message",message)
             startActivity(intent)
+        }
+        btnsharetootherapps.setOnClickListener {
+            val intent=Intent()
+            val message: String=userMsg.text.toString()
+            intent.action=Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,message)
+            intent.type="text/plain"
+
+            startActivity(Intent.createChooser(intent,"Share to :"))
         }
     }
 }
